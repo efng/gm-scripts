@@ -2,7 +2,7 @@
 // @name       MTurk Notifications by efng
 // @author     efng
 // @namespace  http://efng.github.io/
-// @version    0.5.8
+// @version    0.6.0
 // @description Notifications for mturk pages. Changes title of unviewed mturk hits & beeps periodically. Closes any tabs that were open by a script but found no hits. Also re-writes preview links to preview and accept
 // @match      https://www.mturk.com/mturk/accept*
 // @match      https://www.mturk.com/mturk/preview*
@@ -16,30 +16,25 @@ var uselessHits = /Your search did not match any HITs|Your Qualifications do not
 if (uselessHits.test(document.body.innerHTML) ) {
     window.close();
 }
-if ( /preview\?/.test (window.location.href))
-{
-    window.location = window.location.href.replace(/preview\?/,'previewandaccept?')
-}
 
 var initalTitle = document.title;
 
 
 //change these to change what flashes in title of the tabs
-var firstAlert = "New";
-var secondAlert = "---  HIT";
+var firstAlert = "New", secondAlert = "---  HIT";
 
 //random amount of time for bell to play in ms.
-bellDelay = 30000 + Math.floor(Math.random()*20000);
+var bellDelay = 30000 + Math.floor(Math.random()*20000);
+
 //sound to play on alert
-bellAlert = new Audio("http://www.freesound.org/data/previews/188/188032_3403708-lq.mp3");
+var bellAlert = new Audio("http://www.freesound.org/data/previews/188/188032_3403708-lq.mp3");
 
 var blink = function () {
   document.title = document.title == firstAlert ? secondAlert : firstAlert ;
 }
 
 
-var bellAlertId = setInterval(function(){bellAlert.play();}, bellDelay);
-var blinkId = setInterval(blink, 1000);
+var bellAlertId = setInterval(function(){bellAlert.play();}, bellDelay), blinkId = setInterval(blink, 1000);
 
 // this function removes any notifcations happening, then removes liseners.
 var titlechange = function() {
