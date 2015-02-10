@@ -2,8 +2,8 @@
 // @name       MTurk Notifications by efng
 // @author     efng
 // @namespace  http://efng.github.io/
-// @version    0.6.0
-// @description Notifications for mturk pages. Changes title of unviewed mturk hits & beeps periodically. Closes any tabs that were open by a script but found no hits. Also re-writes preview links to preview and accept
+// @version    0.6.1
+// @description Notifications for mturk pages. Changes title of unviewed mturk hits & beeps periodically. Closes any tabs that were open by a script but found no hits.
 // @match      https://www.mturk.com/mturk/accept*
 // @match      https://www.mturk.com/mturk/preview*
 // @match      https://www.mturk.com/mturk/continue*
@@ -23,7 +23,7 @@ var initalTitle = document.title;
 //change these to change what flashes in title of the tabs
 var firstAlert = "New", secondAlert = "---  HIT";
 
-//random amount of time for bell to play in ms.
+//amount of time for bell to play in ms.
 var bellDelay = 30000 + Math.floor(Math.random()*20000);
 
 //sound to play on alert
